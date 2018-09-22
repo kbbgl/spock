@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-
+import '../App.css'
 class SearchBar extends Component{
 
     constructor(props) {
@@ -34,9 +34,9 @@ class SearchBar extends Component{
 
     render(){
         return (
-            <div>
+            <div style={{marginTop: '10px'}}>
                 <form onSubmit={this.handleSubmit}>
-                    <label>
+                    <label >
                     Name: <input type="text" value={this.state.value} onChange={this.handleChange} />
                     </label>
                     <input type="submit" value="Submit" />
