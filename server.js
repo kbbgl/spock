@@ -19,7 +19,7 @@ app.get('/search', (req, res) => {
         console.log(`sending request to https://api.iextrading.com/1.0/stock/${query}/company`);
         console.info(`response status: ${response.status}`);
         
-        if (response.status == 200){
+        if (response.status !== 404){
             res.send(response.data);
             console.info('data:', response.data);
         }

@@ -16,8 +16,61 @@
   color: white;
 }
 
+.card{
+  width: 33%;
+  display: inline-block;
+  font-family: 'Economica', sans-serif;
+  font-size: 1.8em;
+  padding: 40px;
+  margin-top: 16px;
+  -webkit-box-shadow: 3px 3px 5px 6px #ccc;  /* Safari 3-4, iOS 4.0.2 - 4.2, Android 2.3+ */
+  -moz-box-shadow:    3px 3px 5px 6px #ccc;  /* Firefox 3.5 - 3.6 */
+  box-shadow:         3px 3px 5px 6px #ccc;  /* Opera 10.5, IE 9, Firefox 4+, Chrome 6+, iOS 5 */
+}
+
+img {
+  vertical-align: middle;
+  margin-left: 10px;
+}
+
+input[type=text] {
+  margin-left: 10px;
+  font-family : inherit;
+  font-size   : 100%;
+}
+
+
+.company-name{
+  font-size: 1.5em;
+  vertical-align: middle;
+  margin-bottom: 5px;
+}
+
+.company-info{
+  font-size: 0.8em;
+  font-family: 'Economica', sans-serif;
+}
+
+.company-info-tags{
+  font-size: 0.5em;
+  font-family: 'Economica', sans-serif;
+}
+
+.tag-list{
+  list-style-type: none;
+  text-align: initial;
+  display: inline;
+  font-size: 0.6em;
+}
+
+.searchbar-container{
+  margin-top: 10px;
+  font-size: 1.8em;
+  font-family: 'Economica', sans-serif;
+}
+
 .App-title {
-  font-size: 2.0em;
+  font-size: 2.5em;
   font-family: 'Economica', sans-serif;
 }
 
