@@ -5,6 +5,28 @@ class SymbolInfoContainer extends Component {
 
     constructor(props){
         super(props);
+        this.state = {}
+
+        this.hashtagContainer = this.hashtagContainer.bind(this);
+    }
+
+    componentDidMount = () => {
+
+    }
+
+    hashtagContainer = () => {
+
+        let hashtags = this.props.tags;
+        console.log(hashtags);
+
+        hashtags = hashtags.map(hashtag => `#${hashtag.replace(' ', '_')}`);
+
+        return(
+            <div className="hashtags-container">
+                <p>{hashtags.join(', ')}</p>
+            </div>
+        )
+
     }
     render(){
         return(
@@ -28,17 +50,7 @@ class SymbolInfoContainer extends Component {
                     }
                     {
                         this.props.tags && 
-                        <div style={{textAlign: 'center', display:'inline-block'}}>
-                            {
-                                this.props.tags.map((tag, i) => 
-                                        <label
-                                            style={{fontFamily: 'inherit'}}
-                                            key={i}>
-                                            {` #${tag.replace(' ', '_')}`}
-                                        </label>
-                                )
-                            }
-                        </div>
+                        this.hashtagContainer()
                     }
                 </div>
             )

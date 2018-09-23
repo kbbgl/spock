@@ -56,6 +56,11 @@ input[type=text] {
   font-family: 'Economica', sans-serif;
 }
 
+.hashtags-container{
+  font-size: 0.5em;
+  font-family: 'Economica', sans-serif;
+}
+
 .tag-list{
   list-style-type: none;
   text-align: initial;
