@@ -2,12 +2,15 @@ import React, { Component } from 'react';
 import {withAlert} from 'react-alert';
 import axios from 'axios';
 import '../App.css'
+
 class SearchBar extends Component{
 
     constructor(props) {
         super(props);
         this.state = {
-            value: ''};
+            value: '',
+            symbols: []
+        };
     
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -43,18 +46,21 @@ class SearchBar extends Component{
 
     render(){
         return (
-            <div
-                className="searchbar-container">
+            
+            <div className="searchbar-container">
                 <form onSubmit={this.handleSubmit}>
+                    <div className="autocomplete">
                     <input
+                        id="search-input"
                         size={24}
-                        autoComplete="on"
+                        autoComplete="off"
                         autoFocus={true}
                         maxLength={5}
                         placeholder="Search for a stock symbol" 
                         type="text" 
                         value={this.state.value} 
                         onChange={this.handleChange} />    
+                    </div>
                 </form>
             </div>
         )

@@ -5,6 +5,8 @@ import AlertTemplate from 'react-alert-template-basic'
 import SymbolInfoContainer from './comp/SymbolInfoContainer';
 import logo from './logo.svg';
 import './App.css';
+import axios from "axios";
+import SymbolList from './comp/SymbolList';
 
 const options = {
   position: 'bottom center',
@@ -18,10 +20,27 @@ class App extends Component {
   constructor(props){
     super(props);
     this.state = {
-      symbol: undefined
+      symbol: undefined,
+      symbols: []
     }
-
+    this.componentDidMount = this.componentDidMount.bind(this);
     this.updateSymbol = this.updateSymbol.bind(this);
+  }
+
+  componentDidMount = () => {
+    const hostname = window.location.hostname;
+    console.info(`app launched on ${hostname}`);
+
+    axios.get(`http://${hostname}:5000/symbols`)
+      .then(symbols => {
+
+        console.log(symbols);
+        this.setState({
+          symbols: symbols.data
+        })
+
+        console.info(`${this.state.symbols.length} symbols returned`);
+      })
   }
 
   updateSymbol = (symbol) => {
@@ -55,6 +74,8 @@ class App extends Component {
               tags={this.state.symbol.data.tags}/>
           }
         </div>
+        <SymbolList
+          symbolsFromMain={this.state.symbols}/>
       </AlertProvider>
     );
   }

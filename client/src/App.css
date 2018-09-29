@@ -28,6 +28,11 @@
   box-shadow:         3px 3px 5px 6px #ccc;  /* Opera 10.5, IE 9, Firefox 4+, Chrome 6+, iOS 5 */
 }
 
+.autocomplete{
+  position: relative;
+  display: inline-block;
+}
+
 img {
   vertical-align: middle;
   margin-left: 10px;
@@ -38,7 +43,6 @@ input[type=text] {
   font-family : inherit;
   font-size   : 100%;
 }
-
 
 .company-name{
   font-size: 1.5em;

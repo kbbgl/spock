@@ -9,6 +9,7 @@
     "react-alert": "^4.0.4",
     "react-alert-template-basic": "^1.0.0",
     "react-dom": "^16.5.2",
+    "react-list": "^0.8.10",
     "react-scripts": "1.1.5",
     "react-transition-group": "^2.4.0",
     "react-twitter-widgets": "^1.7.1"

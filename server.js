@@ -1,18 +1,21 @@
 const express = require('express');
 const cors = require('cors');
 const axios = require('axios');
+const bodyParser = require('body-parser');
+const MongoClient = require('mongodb').MongoClient;
+const {ObjectId} = require('mongodb');
 
 const app = express();
 const port = process.env.PORT || 5000;
 
 app.use(cors());
+app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.json());
 
 app.get('/search', (req, res) => {
 
     let query = req.query.q;
     
-    
-
     axios.get(`https://api.iextrading.com/1.0/stock/${query}/company`)
     .then((response) => {
 
@@ -28,4 +31,26 @@ app.get('/search', (req, res) => {
     })
 })
 
-app.listen(port, () => console.log(`Express running on port ${port}`));
+var db;
+
+MongoClient.connect('mongodb://admin:spock1@ds115193.mlab.com:15193/spock', {useNewUrlParser: true}, (error, client) =>{
+
+    console.log('mongo up');
+    if(error) console.error(`Couldn't connect to mongodb`,  error);
+
+    db = client.db(`spock`);
+    app.listen(port, () => console.log(`Express running on port ${port}`));
+
+})
+
+app.get('/symbols' , (req, res) => {
+    console.log('GET /symbols');
+    db.collection('symbols').find({}).toArray((err, result) => {
+
+        if(err) console.err('/symbols ', err);
+
+        console.info(`${result.length} symbols returned`);
+        res.send(result);
+
+    })
+});
