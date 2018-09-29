@@ -17,30 +17,30 @@ class SymbolList extends React.Component{
 
     constructor(props){
         super(props);
-        this.state = {
-            symbols: ['test1', 'test2']
-        }
-
         this.renderItem = this.renderItem.bind(this);
     }
 
 
-    renderItem() {
-        return (
-            this.props.symbolsFromMain.map((symbol, index) => 
-            <div
-                key={index}> {symbol.symbol}
-            </div>
-            ));
-      }
+    // renderItem() {
+    //     return (
+    //         this.props.symbolsFromMain.map((symbol, index) => 
+    //         <div
+    //             key={index}> {symbol.symbol}
+    //         </div>
+    //         ));
+    //   }
+
+    renderItem = () => {
+        
+    }
 
     render(){
         return(
                 <div style={style}>
-                    <ReactList
+                    {/*<ReactList
                         itemRenderer={this.renderItem}
-                        length={this.state.symbols.length}
-                        type='uniform'/>
+                        length={this.props.symbolsFromMain.length}
+                        type='simple'/*/}
                 </div>
         )
     }

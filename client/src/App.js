@@ -34,10 +34,15 @@ class App extends Component {
     axios.get(`http://${hostname}:5000/symbols`)
       .then(symbols => {
 
+        symbols.data.forEach(symbol => {
+          this.setState(prevState => ({
+            symbols: [...prevState.symbols, symbol]
+        }))});
+
         console.log(symbols);
-        this.setState({
-          symbols: symbols.data
-        })
+        // this.setState({
+        //   symbols: symbols.data
+        // })
 
         console.info(`${this.state.symbols.length} symbols returned`);
       })
