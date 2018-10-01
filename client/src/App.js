@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import SearchBar from './comp/SearchBar';
 import { Provider as AlertProvider } from "react-alert";
 import AlertTemplate from 'react-alert-template-basic'
-import SymbolInfoContainer from './comp/CompanyCard';
+import CompanyCard from './comp/CompanyCard';
+import GraphOneMonth from './comp/GraphOneMonth'
 import logo from './logo.svg';
 import './App.css';
 import axios from "axios";
@@ -19,7 +20,8 @@ class App extends Component {
   constructor(props){
     super(props);
     this.state = {
-      symbol: undefined
+      symbol: undefined,
+      graphData: []
     }
     this.componentDidMount = this.componentDidMount.bind(this);
     this.updateSymbol = this.updateSymbol.bind(this);
@@ -40,7 +42,7 @@ class App extends Component {
       symbol: symbol.data
     })
     console.info('set state:', this.state.symbol);
-    this.getChart()
+    this.getChart();
   }
 
   getChart = () => {
@@ -50,7 +52,7 @@ class App extends Component {
         q: this.state.symbol.symbol
       }
     }).then((res) => {
-
+      
       /*
         [
           {
@@ -78,8 +80,15 @@ class App extends Component {
           } // , { ... }
         ]
       */
+     
+      if(res.status === 200){
 
-      console.log(res);
+        this.setState({
+          graphData: res.data
+        });
+
+      }
+      
     }).catch((err) => {
       console.error(err);
     })
@@ -98,13 +107,17 @@ class App extends Component {
           <SearchBar parentCallback={this.updateSymbol}/>
           {
             this.state.symbol && 
-            <SymbolInfoContainer 
+            <CompanyCard 
               symb={this.state.symbol}
               companyName={this.state.symbol.companyName}
               website={this.state.symbol.website}
               industry={this.state.symbol.industry}
               sector={this.state.symbol.sector}
               tags={this.state.symbol.tags}/>
+          }
+          {
+            this.state.symbol && 
+            <GraphOneMonth graph={this.state.graphData}/>
           }
         </div>
       </AlertProvider>
