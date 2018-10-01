@@ -8,10 +8,15 @@ class StockInfoContainer extends Component {
         this.state = {}
 
         this.hashtagContainer = this.hashtagContainer.bind(this);
+        this.componentDidMount = this.componentDidMount.bind(this);
     }
 
     componentDidMount = () => {
+        console.log(`compoungWillMount${this.props.symb}`);
+    }
 
+    componentWillMount = () => {
+        
     }
 
     hashtagContainer = () => {
@@ -27,6 +32,14 @@ class StockInfoContainer extends Component {
         )
 
     }
+
+    // renderCompanyName = () => {
+
+    //     return (
+    //         <label className="company-name">{this.props.companyName === undefined ? 'No result' : this.props.companyName}</label> 
+    //     )
+
+    // }
     render(){
         return(
                 <div className="card">

@@ -31,6 +31,27 @@ app.get('/search', (req, res) => {
     })
 })
 
+app.get('/chart', (req, res) => {
+
+    let query = req.query.q;
+
+    //GET /stock/{symbol}/chart/{range}
+    
+    axios.get(`https://api.iextrading.com/1.0/stock/${query}/chart/1m`)
+    .then((response) => {
+
+        console.log(`sending request to https://api.iextrading.com/1.0/stock/${query}/chart/1m`);
+        console.info(`response status: ${response.status}`);
+        
+        if (response.status !== 404){
+            res.send(response.data);
+            console.info('data:', response.data);
+        }
+    }).catch(() => {
+        res.send(`${query} symbol not found`);
+    })
+})
+
 var db;
 
 MongoClient.connect('mongodb://admin:spock1@ds115193.mlab.com:15193/spock', {useNewUrlParser: true}, (error, client) =>{
@@ -43,13 +64,15 @@ MongoClient.connect('mongodb://admin:spock1@ds115193.mlab.com:15193/spock', {use
 
 })
 
-app.get('/symbols' , (req, res) => {
-    console.log('GET /symbols');
-    // db.collection('symbols').find({}).toArray((err, result) => {
-    db.collection('symbols').find({}).limit(50).toArray((err, result) => {
+// GET all symbols
+// app.get('/symbols' , (req, res) => {
+//     console.log('GET /symbols');
+//     // db.collection('symbols').find({}).toArray((err, result) => {
+//     db.collection('symbols').find({}).limit(50).toArray((err, result) => {
 
-        if(err) console.err('/symbols ', err);
-        console.info(`${result.length} symbols returned`);
-        res.send(result);
-    })
-});
+//         if(err) console.err('/symbols ', err);
+//         console.info(`${result.length} symbols returned`);
+//         res.send(result);
+//     })
+// });
+

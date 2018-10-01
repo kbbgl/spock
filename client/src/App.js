@@ -20,32 +20,16 @@ class App extends Component {
   constructor(props){
     super(props);
     this.state = {
-      symbol: undefined,
-      symbols: []
+      symbol: undefined
     }
     this.componentDidMount = this.componentDidMount.bind(this);
     this.updateSymbol = this.updateSymbol.bind(this);
+    this.getChart = this.getChart.bind(this);
   }
 
   componentDidMount = () => {
     const hostname = window.location.hostname;
     console.info(`app launched on ${hostname}`);
-
-    axios.get(`http://${hostname}:5000/symbols`)
-      .then(symbols => {
-
-        symbols.data.forEach(symbol => {
-          this.setState(prevState => ({
-            symbols: [...prevState.symbols, symbol]
-        }))});
-
-        console.log(symbols);
-        // this.setState({
-        //   symbols: symbols.data
-        // })
-
-        console.info(`${this.state.symbols.length} symbols returned`);
-      })
   }
 
   updateSymbol = (symbol) => {
@@ -54,9 +38,24 @@ class App extends Component {
       this.props.alert.show('Alert test');
     }
     this.setState({
-      symbol
+      symbol: symbol.data
     })
     console.info('set state:', this.state.symbol);
+    this.getChart()
+  }
+
+  getChart = () => {
+    
+    axios.get(`http://${window.location.hostname}:5000/chart`, {
+      params: {
+        q: this.state.symbol.symbol
+      }
+    }).then((res) => {
+      console.log(res);
+    }).catch((err) => {
+      console.error(err);
+    })
+    
   }
 
   render() {
@@ -72,15 +71,14 @@ class App extends Component {
           {
             this.state.symbol && 
             <SymbolInfoContainer 
-              companyName={this.state.symbol.data.companyName}
-              website={this.state.symbol.data.website}
-              industry={this.state.symbol.data.industry}
-              sector={this.state.symbol.data.sector}
-              tags={this.state.symbol.data.tags}/>
+              symb={this.state.symbol}
+              companyName={this.state.symbol.companyName}
+              website={this.state.symbol.website}
+              industry={this.state.symbol.industry}
+              sector={this.state.symbol.sector}
+              tags={this.state.symbol.tags}/>
           }
         </div>
-        <SymbolList
-          symbolsFromMain={this.state.symbols}/>
       </AlertProvider>
     );
   }

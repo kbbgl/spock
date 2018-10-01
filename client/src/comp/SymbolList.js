@@ -1,5 +1,4 @@
 import React from 'react';
-import ReactList from 'react-list';
 
 const style = {
     marginTop:'5px',
@@ -17,8 +16,12 @@ class SymbolList extends React.Component{
 
     constructor(props){
         super(props);
+        this.state = {
+            chart: []
+        }
         this.renderItem = this.renderItem.bind(this);
     }
+
 
 
     // renderItem() {
@@ -36,12 +39,7 @@ class SymbolList extends React.Component{
 
     render(){
         return(
-                <div style={style}>
-                    {/*<ReactList
-                        itemRenderer={this.renderItem}
-                        length={this.props.symbolsFromMain.length}
-                        type='simple'/*/}
-                </div>
+                <div style={style}/>
         )
     }
 
