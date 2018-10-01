@@ -3,7 +3,7 @@ import SearchBar from './comp/SearchBar';
 import { Provider as AlertProvider } from "react-alert";
 import AlertTemplate from 'react-alert-template-basic'
 import CompanyCard from './comp/CompanyCard';
-import GraphOneMonth from './comp/GraphOneMonth'
+import GraphOneMonthCard from './comp/GraphOneMonthCard'
 import logo from './logo.svg';
 import './App.css';
 import axios from "axios";
@@ -117,7 +117,7 @@ class App extends Component {
           }
           {
             this.state.symbol && 
-            <GraphOneMonth graph={this.state.graphData}/>
+            <GraphOneMonthCard graph={this.state.graphData}/>
           }
         </div>
       </AlertProvider>
