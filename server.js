@@ -63,16 +63,3 @@ MongoClient.connect('mongodb://admin:spock1@ds115193.mlab.com:15193/spock', {use
     app.listen(port, () => console.log(`Express running on port ${port}`));
 
 })
-
-// GET all symbols
-// app.get('/symbols' , (req, res) => {
-//     console.log('GET /symbols');
-//     // db.collection('symbols').find({}).toArray((err, result) => {
-//     db.collection('symbols').find({}).limit(50).toArray((err, result) => {
-
-//         if(err) console.err('/symbols ', err);
-//         console.info(`${result.length} symbols returned`);
-//         res.send(result);
-//     })
-// });
-

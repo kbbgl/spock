@@ -2,11 +2,10 @@ import React, { Component } from 'react';
 import SearchBar from './comp/SearchBar';
 import { Provider as AlertProvider } from "react-alert";
 import AlertTemplate from 'react-alert-template-basic'
-import SymbolInfoContainer from './comp/SymbolInfoContainer';
+import SymbolInfoContainer from './comp/CompanyCard';
 import logo from './logo.svg';
 import './App.css';
 import axios from "axios";
-import SymbolList from './comp/SymbolList';
 
 const options = {
   position: 'bottom center',
@@ -51,6 +50,35 @@ class App extends Component {
         q: this.state.symbol.symbol
       }
     }).then((res) => {
+
+      /*
+        [
+          {
+          "date": "20171215"
+          "minute": "09:30",
+          "label": "09:30 AM",
+          "high": 143.98,
+          "low": 143.775,
+          "average": 143.889,
+          "volume": 3070,
+          "notional": 441740.275,
+          "numberOfTrades": 20,
+          "marktHigh": 143.98,
+          "marketLow": 143.775,
+          "marketAverage": 143.889,
+          "marketVolume": 3070,
+          "marketNotional": 441740.275,
+          "marketNumberOfTrades": 20,
+          "open": 143.98,
+          "close": 143.775,
+          "marktOpen": 143.98,
+          "marketClose": 143.775,
+          "changeOverTime": -0.0039,
+          "marketChangeOverTime": -0.004
+          } // , { ... }
+        ]
+      */
+
       console.log(res);
     }).catch((err) => {
       console.error(err);
